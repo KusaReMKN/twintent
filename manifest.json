@@ -1,0 +1,12 @@
+{
+	"manifest_version": 3,
+	"name": "twintent",
+	"version": "0.0.1",
+	"description": "訪問しているページを共有しなさい‼️💢",
+	"action": {
+		"default_popup": "index.html"
+	},
+	"permissions": [
+		"activeTab"
+	]
+}
