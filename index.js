@@ -5,7 +5,10 @@ const twintentUrl = 'https://twitter.com/intent/tweet';
 async function
 main()
 {
-	const tabs = await chrome.tabs.query({ active: true });
+	const tabs = await chrome.tabs.query({
+		active: true,
+		currentWindow: true,
+	});
 	const tab = tabs[0];
 
 	const url = new URL(twintentUrl);
