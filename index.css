@@ -1,0 +1,47 @@
+body {
+	width: 40rem;
+}
+
+main {
+	font-size: 1.1rem;
+}
+
+select, input {
+	font: inherit;
+}
+
+input[type="submit"] {
+	width: 100%;
+	line-height: 3rem;
+	font-size: 2rem;
+}
+
+.block-gap > * {
+	margin-block: .5rem;
+}
+
+.no-gap {
+	margin: inherit;
+}
+
+.center {
+	text-align: center;
+}
+
+.labelinput > * {
+	display: block;
+	width: 100%;
+}
+
+.indent > * {
+	padding-inline-start: 2.5rem;
+}
+
+.no-indent {
+	padding-inline-start: inherit;
+}
+
+.mini {
+	line-height: 1.5rem !important;
+	font-size: 1rem !important;
+}

@@ -4,9 +4,76 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>訪問しているページを共有しなさい‼️💢</title>
-    <script src="./index.js" defer></script>
+    <script type="module" src="./index.js"></script>
+    <link rel="stylesheet" href="./index.css">
   </head>
   <body>
-    <div>訪問しているページを共有しなさい‼️💢</div>
+    <header class="center">
+      <h1>訪問しているページを共有しなさい‼️💢</h1>
+    </header>
+    <main>
+      <form id="formShare">
+        <fieldset class="block-gap">
+          <legend class="no-gap">🦈 共有する</legend>
+          <div class="labelinput">
+            <label for="shareVia">🚿 エッ、どうやって❓</label>
+            <select id="shareVia"></select>
+          </div>
+          <div>
+            <input type="submit" id="btnShare" class="full" value="🥘 共有する">
+          </div>
+        </fieldset>
+      </form>
+    </main>
+    <hr>
+    <aside>
+      <details>
+        <summary>🦆 設定をしたいのカモ</summary>
+        <form id="modItem">
+          <fieldset class="block-gap">
+            <legend class="no-gap">🏵️ 設定をしよう</legend>
+            <div class="labelinput">
+              <label for="itemList">🤯 どれを⁉️</label>
+              <select id="itemList">
+                <option value="newItem">(新しい項目)</option>
+              </select>
+            </div>
+            <div class="labelinput">
+              <label for="itemName">📛 名前</label>
+              <input type="text" id="itemName" placeholder="Twitter">
+            </div>
+            <div class="labelinput">
+              <label for="itemUrl">🔗 共有 URL</label>
+              <input type="url" id="itemUrl" placeholder="https://twitter.com/intent/tweet">
+            </div>
+            <div class="labelinput">
+              <label for="itemTextKey">📕 テキスト用 key</label>
+              <input type="text" id="itemTextKey" placeholder="text">
+            </div>
+            <div class="labelinput">
+              <label for="itemUrlKey">🥌 URL 用 key</label>
+              <input type="text" id="itemUrlKey" placeholder="url">
+            </div>
+            <div>
+              <input type="checkbox" id="itemUrlAsText">
+              <label for="itemUrlAsText">🗿 URL をテキストとして送信する</label>
+            </div>
+            <div>
+              <input type="submit" name="modify" value="🌆 設定する">
+            </div>
+            <div>
+              <input type="submit" name="remove" class="mini" value="🧃 削除する">
+            </div>
+          </fieldset>
+        </form>
+      </details>
+    </aside>
+    <hr>
+    <footer class="center">
+      <small>
+        twintent <span id="versionStr"></span> &copy; 2023 KusaReMKN.
+        <a href="https://github.com/KusaReMKN/twintent">GitHub</a>
+      </small>
+    </footer>
   </body>
 </html>
