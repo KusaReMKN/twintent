@@ -23,6 +23,8 @@ initialize(_)
         window.shareVia.appendChild(option.cloneNode(true));
         window.itemList.appendChild(option.cloneNode(true));
     });
+
+    window.mask.parentElement.removeChild(window.mask);
 }
 window.addEventListener('DOMContentLoaded', initialize);
 

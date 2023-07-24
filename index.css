@@ -45,3 +45,23 @@ input[type="submit"] {
 	line-height: 1.5rem !important;
 	font-size: 1rem !important;
 }
+
+.mask {
+	display: grid;
+	place-items: center;
+	position: fixed;
+	top: 0; left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(128, 128, 128, 0.5);
+}
+
+.box {
+	background: white;
+	padding: 1rem;
+	border: outset 3px;
+}
+
+.big {
+	font-size: large;
+}
