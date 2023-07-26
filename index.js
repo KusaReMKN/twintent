@@ -97,13 +97,19 @@ async function
 modifyItem(e)
 {
     e.preventDefault();
+    const prevValue = e.submitter.value;
     e.submitter.disabled = true;
     e.submitter.value = '😁 待たれよ';
 
     const item = await Settings.getItem(window.itemList.value) || {};
     if (e.submitter.name === 'remove') {
-        if (window.confirm(`🛒 正気か？ ${item.name} は消えます‼️`))
+        if (window.confirm(`🛒 正気か？ ${item.name} は消えます‼️`)) {
             await Settings.removeItem(window.itemList.value);
+        } else {
+            e.submitter.value = prevValue;
+            e.submitter.disabled = false;;
+            return false;   /* don't reload */
+        }
     } else {
         item.name = window.itemName.value;
         item.url = window.itemUrl.value;
