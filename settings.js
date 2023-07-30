@@ -62,7 +62,7 @@ migrate()
 
     while (settings.version !== manifest.version)
         switch (settings.version) {
-            case undefined:	/* first boot */
+            case undefined: /* first boot */
                 const sampleItem = {
                     name: 'Twitter',
                     url: 'https://twitter.com/intent/tweet',
@@ -73,7 +73,7 @@ migrate()
                 settings.items[window.crypto.randomUUID()] = sampleItem;
                 settings.version = manifest.version;
                 break;
-            default:	/* no need to migrate */
+            default:    /* no need to migrate */
                 settings.version = manifest.version;
         }
     await chrome.storage.local.set(settings);
@@ -97,7 +97,7 @@ removeItem(id)
  *
  * @param { string } id 更新する項目の識別子
  * @param { { name: string, url: string, textKey: string, urlKey: string | null } } item
- * 更新するする項目
+ * 更新する項目
  */
 export async function
 setItem(id, item)

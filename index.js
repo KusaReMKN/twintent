@@ -109,7 +109,7 @@ window.itemUrlAsText.addEventListener('change', switchUrlKey);
 
 /**
  * 要素を編集する。
- *
+ * modItem のイベントハンドラ。
  */
 async function
 modifyItem(e)
