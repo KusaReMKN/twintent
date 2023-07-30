@@ -19,6 +19,54 @@ openBread(dialog)
 }
 
 /**
+ * Twitter から X に移行する。
+ */
+async function
+twitter2x(items)
+{
+    const hasTwitter = Object.keys(items).some(key => /twitter/i.test(items[key].name));
+    if (hasTwitter) {
+        const [ ok, check ] = await new Promise(r => {
+            const p = document.createElement('p');
+            p.textContent = '💪 Twitter を X に置き換えますくｗｗｗｗ';
+            const check = document.createElement('input');
+            check.setAttribute('type', 'checkbox');
+            const labelCheck = document.createElement('label');
+            labelCheck.append(check, ' ', '二度と見えない');
+            const divCheck = document.createElement('div');
+            divCheck.append(labelCheck);
+            const buttonCancel = document.createElement('button');
+            buttonCancel.textContent = '忘れる';
+            buttonCancel.addEventListener('click', _ => r(dialog.close([ false, check.checked ])));
+            const buttonOk = document.createElement('button');
+            buttonOk.textContent = 'はい';
+            buttonOk.addEventListener('click', _ => r(dialog.close([ true, true ])));
+            const divButtons = document.createElement('div');
+            divButtons.style.textAlign = 'right';
+            divButtons.append(buttonCancel, ' ', buttonOk);
+            dialog.setContent(p, divCheck, divButtons);
+            dialog.openModal();
+        });
+        if (ok) {
+            openBread(dialog);
+            for (const key in items) {
+                const item = await Settings.getItem(key);
+                item.name = item.name.replaceAll(/twitter/gi, 'X');
+                await Settings.setItem(key, item);
+            }
+            await Settings.setFlag('twitter2x', true);
+            window.location.reload();
+        }
+        if (check)
+            await Settings.setFlag('twitter2x', true);
+        else
+            await Settings.setSessionFlag('twitter2x', true);
+    } else {
+        await Settings.setFlag('twitter2x', true);
+    }
+}
+
+/**
  * 要素を初期化する。
  * 読み込み完了時のイベントハンドラ。
  */
@@ -43,6 +91,9 @@ initialize(_)
     });
 
     dialog.close();
+
+    if (! await Settings.getFlag('twitter2x') && ! await Settings.getSessionFlag('twitter2x'))
+        await twitter2x(items);
 }
 window.addEventListener('DOMContentLoaded', initialize);
 

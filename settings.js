@@ -38,6 +38,19 @@ getAllItems()
 }
 
 /**
+ * 指定されたフラグ項目を返す。
+ *
+ * @param { string } id 要求する項目の識別子
+ * @returns { Promise<boolean> }
+ */
+export async function
+getFlag(id)
+{
+    const settings = await chrome.storage.local.get();
+    return settings.flags[id] || false;
+}
+
+/**
  * 指定された設定項目を返す。
  *
  * @param { string } id 要求する項目の識別子
@@ -48,6 +61,19 @@ getItem(id)
 {
     const items = await getAllItems();
     return items[id];
+}
+
+/**
+ * 指定されたセッション限定のフラグ項目を返す。
+ *
+ * @param { string } id 要求する項目の識別子
+ * @returns { Promise<boolean> }
+ */
+export async function
+getSessionFlag(id)
+{
+    const settings = await chrome.storage.session.get();
+    return settings.flags?.[id] || false;
 }
 
 /**
@@ -64,18 +90,37 @@ migrate()
         switch (settings.version) {
             case undefined: /* first boot */
                 const sampleItem = {
-                    name: 'Twitter',
+                    name: 'X (Twitter)',
                     url: 'https://twitter.com/intent/tweet',
                     textKey: 'text',
                     urlKey: 'url',
                 };
                 settings.items = {};
                 settings.items[window.crypto.randomUUID()] = sampleItem;
+                settings.flags = {};
+                settings.flags['twitter2x'] = true;
                 settings.version = manifest.version;
                 break;
+            case '0.1.0':
+            case '0.1.1':   /* last of v0.1.x */
+                settings.flags = {};
+                /* FALLTHROUGH */
             default:    /* no need to migrate */
                 settings.version = manifest.version;
         }
+    await chrome.storage.local.set(settings);
+}
+
+/**
+ * 指定したフラグ項目を削除する。
+ *
+ * @param { string } id 削除する項目の識別子
+ */
+export async function
+removeFlag(id)
+{
+    const settings = await chrome.storage.local.get();
+    delete settings.flags[id];
     await chrome.storage.local.set(settings);
 }
 
@@ -93,6 +138,34 @@ removeItem(id)
 }
 
 /**
+ * 指定したセッション限定のフラグ項目を削除する。
+ *
+ * @param { string } id 削除する項目の識別子
+ */
+export async function
+removeSessionFlag(id)
+{
+    const settings = await chrome.storage.session.get();
+    settings.flags = settings.flags || {};
+    delete settings.flags[id];
+    await chrome.storage.session.set(settings);
+}
+
+/**
+ * 指定したフラグ項目を更新する。
+ *
+ * @param { string } id 更新する項目の識別子
+ * @param { boolean } flag 更新する項目
+ */
+export async function
+setFlag(id, flag)
+{
+    const settings = await chrome.storage.local.get();
+    settings.flags[id] = flag;
+    await chrome.storage.local.set(settings);
+}
+
+/**
  * 指定した設定項目を更新する。
  *
  * @param { string } id 更新する項目の識別子
@@ -105,4 +178,19 @@ setItem(id, item)
     const settings = await chrome.storage.local.get();
     settings.items[id] = item;
     await chrome.storage.local.set(settings);
+}
+
+/**
+ * 指定したセッション限定のフラグ項目を更新する。
+ *
+ * @param { string } id 更新する項目の識別子
+ * @param { boolean } flag 更新する項目
+ */
+export async function
+setSessionFlag(id, flag)
+{
+    const settings = await chrome.storage.session.get();
+    settings.flags = settings.flags || {};
+    settings.flags[id] = flag;
+    await chrome.storage.session.set(settings);
 }
