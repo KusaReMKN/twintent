@@ -1,6 +1,9 @@
 'use strict';
 
+import Dialog from './dialog.js';
 import * as Settings from './settings.js';
+
+const dialog = new Dialog();
 
 /**
  * 要素を初期化する。
@@ -103,7 +106,7 @@ modifyItem(e)
 
     const item = await Settings.getItem(window.itemList.value) || {};
     if (e.submitter.name === 'remove') {
-        if (window.confirm(`🛒 正気か？ ${item.name} は消えます‼️`)) {
+        if (await dialog.confirm(`🛒 正気か？ ${item.name} は消えます‼️`)) {
             await Settings.removeItem(window.itemList.value);
         } else {
             e.submitter.value = prevValue;

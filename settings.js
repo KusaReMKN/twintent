@@ -72,7 +72,6 @@ migrate()
                 settings.items = {};
                 settings.items[window.crypto.randomUUID()] = sampleItem;
                 settings.version = manifest.version;
-                window.alert('🌪️ twintent をインストールしてくれてありがとう⁉️');
                 break;
             default:	/* no need to migrate */
                 settings.version = manifest.version;
