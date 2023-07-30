@@ -6,12 +6,27 @@ import * as Settings from './settings.js';
 const dialog = new Dialog();
 
 /**
+ * 食パンを表示する。
+ */
+function
+openBread(dialog)
+{
+    const p = document.createElement('p');
+    p.textContent = '🍞 準備してます、いま';
+    p.classList.add('big');
+    dialog.setContent(p);
+    dialog.openModal();
+}
+
+/**
  * 要素を初期化する。
  * 読み込み完了時のイベントハンドラ。
  */
 async function
 initialize(_)
 {
+    openBread(dialog);
+
     await Settings.migrate();
 
     const manifest = chrome.runtime.getManifest();
@@ -27,7 +42,7 @@ initialize(_)
         window.itemList.appendChild(option.cloneNode(true));
     });
 
-    window.mask.parentElement.removeChild(window.mask);
+    dialog.close();
 }
 window.addEventListener('DOMContentLoaded', initialize);
 
