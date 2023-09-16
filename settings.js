@@ -28,7 +28,7 @@ clear(yes)
 /**
  * 全ての設定項目の一覧を返す。
  *
- * @returns { Promise<{ name: string, url: string, textKey: string, urlKey: string | null }[]> }
+ * @returns { Promise<{ [key: string]: { name: string, url: string, textKey: string, urlKey: string | null } }> }
  */
 export async function
 getAllItems()
