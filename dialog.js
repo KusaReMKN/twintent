@@ -16,6 +16,7 @@ export default class Dialog {
     constructor(parent) {
         const base = parent || document.body;
         this.#dialog = document.createElement('dialog');
+        this.#dialog.style.maxWidth = '80vw';
         base.appendChild(this.#dialog);
     }
 
