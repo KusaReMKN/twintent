@@ -7,6 +7,7 @@ main {
 }
 
 select, input {
+	box-sizing: border-box;
 	font: inherit;
 }
 
