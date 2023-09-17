@@ -28,7 +28,7 @@
     <hr>
     <aside>
       <details>
-        <summary>🦆 設定をしたいのカモ</summary>
+        <summary>🦆 共有方法の設定をしたいのカモ</summary>
         <form id="modItem">
           <fieldset class="block-gap">
             <legend class="no-gap">🏵️ 設定をしよう</legend>
@@ -63,6 +63,56 @@
             </div>
             <div>
               <input type="submit" name="remove" class="mini" value="🧃 削除する">
+            </div>
+          </fieldset>
+        </form>
+      </details>
+      <hr>
+      <details>
+        <summary>🥨 前処理の設定を設定をしたいのカモ</summary>
+        <form id="modPreProc">
+          <fieldset class="block-gap">
+            <legend class="no-gap">🧿 設定をしよう</legend>
+            <div class="labelinput">
+              <label for="procList">😫 どれを⁉️</label>
+              <select id="procList">
+                <option value="newProc">(新しい項目)</option>
+              </select>
+            </div>
+            <div class="labelinput">
+              <label for="procDesc">🏜️ 簡単な説明</label>
+              <input type="text" id="procDesc" placeholder="Twitter には YouTube のプレイリストを共有しない">
+            </div>
+            <div class="labelinput">
+              <label for="procUrl">📃 対象 URL (後方一致)</label>
+              <input type="text" id="procUrl" placeholder="youtube.com">
+              <label><input type="checkbox" id="procUrlRe"> 正規表現として扱う</label>
+            </div>
+            <div class="labelinput">
+              <label for="procShare">🥔 対象共有先 URL (後方一致)</label>
+              <input type="text" id="procShare" placeholder="(twitter|x).com">
+              <label><input type="checkbox" id="procShareRe"> 正規表現として扱う</label>
+            </div>
+            <div class="labelinput">
+              <span>
+                <label for="procProc">🛡️ 前処理の種類</label>
+                <button id="procHelp">説明を見る</button>
+              </span>
+              <select id="procProc"></select>
+            </div>
+            <div class="labelinput">
+              <label for="procParam">🤪 前処理のパラメータ</label>
+              <input type="text" id="procParam" placeholder="詳細は “説明を見る” ボタンから確認できます">
+            </div>
+            <div class="labelinput">
+              <label for="procPri">🖨️ 前処理の優先度</label>
+              <input type="number" id="procPri" placeholder="100 (負値を指定すると処理されません)">
+            </div>
+            <div>
+              <input type="submit" name="modify" value="🚲 設定する">
+            </div>
+            <div>
+              <input type="submit" name="remove" class="mini" value="🏆 削除する">
             </div>
           </fieldset>
         </form>
