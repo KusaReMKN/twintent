@@ -37,6 +37,26 @@ noOperation(textUrl, params = '')
 }
 
 /**
+ * URL からフラグメント識別子を取り去る
+ *
+ * @param{ { text: string, url: URL } } [ textUrl ] 操作対象となるテキストと URL
+ * @param{ string } [ params = '' ] 無視される
+ * @returns{ { text: string, url: URL } | string } 操作後のテキストと URL
+ */
+export function
+removeHash(textUrl, params = '')
+{
+    if (textUrl === undefined)
+        return `ページの URL からフラグメント識別子を取り去る
+        訪問しているページの URL からフラグメント識別子（# とそれ以降の文字列）を取り去ります。
+        “🤪 前処理のパラメータ” に指定された内容は単に無視されます。
+        `;
+
+    textUrl.url.hash = '';
+    return textUrl;
+}
+
+/**
  * URL から指定されたパラメータを取り去る。
  *
  * @param{ { text: string, url: URL } } [ textUrl ] 操作対象となるテキストと URL
