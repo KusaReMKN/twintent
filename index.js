@@ -214,7 +214,7 @@ share(e)
     );
 
     if (item.urlKey === null) {
-        url.searchParams.set(item.textKey, textUrl.text + ' ' + textUrl.url.toString());
+        url.searchParams.set(item.textKey, textUrl.text + '\n' + textUrl.url.toString());
     } else {
         url.searchParams.set(item.textKey, textUrl.text);
         url.searchParams.set(item.urlKey, textUrl.url.toString());
