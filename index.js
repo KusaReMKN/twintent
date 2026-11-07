@@ -121,6 +121,12 @@ initialize(_)
     openBread(dialog);
 
     await Settings.migrate();
+    await Settings.setItem('clipboard', {   /* c.f.: share() */
+        'name': 'クリップボードにコピー',
+        'url' : 'about:clipboard',
+        'textKey': 'text',
+        'urlKey': null,
+    });
 
     const manifest = chrome.runtime.getManifest();
     window.versionStr.textContent = `(v${manifest.version})`
@@ -219,7 +225,15 @@ share(e)
         url.searchParams.set(item.textKey, textUrl.text);
         url.searchParams.set(item.urlKey, textUrl.url.toString());
     }
-    window.location.href = url.toString();
+
+    if (window.shareVia.value === 'clipboard') {    /* c.f.: initialize() */
+        const text = url.searchParams.get('text');
+        await window.navigator.clipboard.writeText(text);
+        await dialog.alert('🌰 これがクリップボードにコピーされたが‼️\n' + text);
+        window.location.reload();
+    } else {
+        window.location.href = url.toString();
+    }
 
     return false;
 }
