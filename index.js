@@ -112,6 +112,50 @@ introducePreProcs()
 }
 
 /**
+ * v0.4.0 を紹介する
+ */
+async function
+introduceV0_4_0()
+{
+    const result = await new Promise(r => {
+        const b = document.createElement('b');
+        b.textContent = '【三年ぶりに更新】新機能と変更点とについて【令和最新式】';
+
+        const p = document.createElement('p');
+        p.innerHTML = `
+        はい、承知いたしました。指定された git のコミットの差分から、ユーザ向けの紹介文を生成します。<br>
+        まず、新しい前処理機能が追加されました。
+        追加された前処理機能では、URL に含まれるフラグメント識別子（# から始まる部分）を取り除くことができます。<br>
+        また、「🗿 URL をテキストとして送信する」場合にテキストと URL とを区切るための文字が変更されました。
+        これは些細ですが、空白区切りから改行区切りに変更されています。<br>
+        最後に、新しい共有方法として「クリップボードにコピー」が追加されました。
+        共有方法の設定をするのが面倒な場合にも、この機能を使えば訪問しているページを簡単に共有できます。<br>
+        いかがでしょうか？　修正が必要であれば、指摘してください。
+        `;
+
+        const buttonYes = document.createElement('button');
+        buttonYes.textContent = 'わかった';
+        buttonYes.addEventListener('click', _ => r(dialog.close(true)));
+
+        const buttonNo = document.createElement('button');
+        buttonNo.textContent = 'わからない';
+        buttonNo.addEventListener('click', _ => r(dialog.close(false)));
+
+        const div = document.createElement('div');
+        div.style.textAlign = 'right';
+        div.append(buttonYes);
+        div.append(' ');
+        div.append(buttonNo);
+
+        dialog.setContent(b, p, div);
+        dialog.openModal();
+    });
+
+    if (result)
+        await Settings.setFlag('v0.4.0', true);
+}
+
+/**
  * 要素を初期化する。
  * 読み込み完了時のイベントハンドラ。
  */
@@ -164,6 +208,9 @@ initialize(_)
 
     if (! await Settings.getFlag('preprocs'))
         await introducePreProcs();
+
+    if (! await Settings.getFlag('v0.4.0'))
+        await introduceV0_4_0();
 }
 window.addEventListener('DOMContentLoaded', initialize);
 

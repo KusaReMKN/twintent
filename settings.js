@@ -156,6 +156,7 @@ migrate()
                 settings.flags = {};
                 settings.flags['twitter2x'] = true;
                 settings.flags['preprocs'] = true;
+                settings.flags['v0.4.0'] = true;
                 settings.preProcs = {};
                 settings.preProcs[window.crypto.randomUUID()] = samplePreProc1;
                 settings.preProcs[window.crypto.randomUUID()] = samplePreProc2;
@@ -171,6 +172,8 @@ migrate()
                 settings.preProcs[window.crypto.randomUUID()] = samplePreProc2;
                 /* FALLTHROUGH */
             case '0.2.9':   /* beta */
+            case '0.3.0':   /* last of v0.3.0 */
+                /* FALLTHROUGH */
             default:    /* no need to migrate */
                 settings.version = manifest.version;
         }
